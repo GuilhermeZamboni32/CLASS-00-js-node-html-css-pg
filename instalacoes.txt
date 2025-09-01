@@ -1,0 +1,13 @@
+Vá para a pasta do backend e instale os pacote abaixo:
+    npm install express
+    npm install pg
+    npm install nodemon OU npm install -g --force nodemon
+    npm install cors
+    npm install dotenv
+
+    OU
+    npm install express pg nodemon cors dotenv
+
+
+Como rodar o código?
+    npm start
