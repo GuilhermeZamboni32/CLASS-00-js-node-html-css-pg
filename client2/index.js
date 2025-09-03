@@ -4,22 +4,22 @@ document.addEventListener('DOMContentLoaded', function () {
     .then((data) => loadHTMLTable(data['data']));
 
   document.querySelector('table tbody').addEventListener('click', function (event) {
-    if (event.target.className === 'delete-row-btn') {
+    if (event.target.className === 'botao-deletar') {
       deleteRowById(event.target.dataset.id);
     }
-    if (event.target.className === 'edit-row-btn') {
+    if (event.target.className === 'botao-editar') {
       handleEditRow(event.target.dataset.id);
     }
   });
 
-  document.getElementById('search-btn').onclick = function () {
+  document.getElementById('botao-buscar').onclick = function () {
     const searchValue = document.getElementById('search-input').value;
     fetch('http://localhost:3000/search/' + searchValue)
       .then((response) => response.json())
       .then((data) => loadHTMLTable(data['data']));
   };
 
-  document.getElementById('add-btn').onclick = function () {
+  document.getElementById('botao-adicionar').onclick = function () {
     const cpf = document.getElementById('cpf-input').value;
     const nome = document.getElementById('name-input').value;
     const email = document.getElementById('email-input').value;
@@ -50,13 +50,13 @@ document.addEventListener('DOMContentLoaded', function () {
       });
   };
 
-  document.getElementById('update-btn').onclick = function () {
+  document.getElementById('botao-atualiza-modal').onclick = function () {
     const updateCpf = document.getElementById('update-cpf-input').value;
     const updateName = document.getElementById('update-name-input').value;
     const updateEmail = document.getElementById('update-email-input').value;
     const updateAge = document.getElementById('update-age-input').value;
     const updateProfession = document.getElementById('update-profession-input').value;
-    const id = document.getElementById('update-btn').dataset.id;
+    const id = document.getElementById('botao-atualiza-modal').dataset.id;
 
     fetch('http://localhost:3000/update', {
       method: 'PATCH',
@@ -79,7 +79,7 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('modal').style.display = 'none';
   };
 
-  document.getElementById('close-modal-btn').onclick = function () {
+  document.getElementById('botao-fecha-modal').onclick = function () {
     document.getElementById('modal').style.display = 'none';
   };
 });

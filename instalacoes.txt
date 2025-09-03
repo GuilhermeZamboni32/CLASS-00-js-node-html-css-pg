@@ -11,3 +11,12 @@ Vá para a pasta do backend e instale os pacote abaixo:
 
 Como rodar o código?
     npm start
+
+No seu banco de dados:
+CREATE TABLE client (
+    cpf VARCHAR(11) PRIMARY KEY NOT NULL,
+    nome VARCHAR(55) NOT NULL,
+    email VARCHAR(100) NOT NULL ,
+    idade INTEGER,
+    profissao VARCHAR(100)
+);
