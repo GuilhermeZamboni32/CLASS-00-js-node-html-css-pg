@@ -1,35 +1,45 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="stylesheet.css" />
-  <title>FullStact web app</title>
+  <title>FullStack Web App</title>
 </head>
 <body>
   <main>
+    <!-- Seção de inserção de novos dados -->
     <section id="insert-section">
-      <h2>Adicionar Novo Registro</h2>
-      <label for="cpf-input">CPF:</label>
-      <input type="text" id="cpf-input" placeholder="Digite o CPF" />
-      <label for="name-input">Nome:</label>
-      <input type="text" id="name-input" placeholder="Digite o nome" />
-      <label for="email-input">Email:</label>
-      <input type="email" id="email-input" placeholder="Digite o email" />
-      <label for="age-input">Idade:</label>
-      <input type="number" id="age-input" placeholder="Digite a idade" />
-      <label for="profession-input">Profissão:</label>
-      <input type="text" id="profession-input" placeholder="Digite a profissão" />
+      <div>
+        <label for="cpf-input">CPF:</label>
+        <input type="text" id="cpf-input" placeholder="000.000.000-00" />
+      </div>
+      <div>
+        <label for="name-input">Nome:</label>
+        <input type="text" id="name-input" placeholder="Seu nome completo" />
+      </div>
+      <div>
+        <label for="email-input">Email:</label>
+        <input type="email" id="email-input" placeholder="seu@email.com" />
+      </div>
+      <div>
+        <label for="age-input">Idade:</label>
+        <input type="number" id="age-input" placeholder="Sua idade" />
+      </div>
+      <div>
+        <label for="profession-input">Profissão:</label>
+        <input type="text" id="profession-input" placeholder="Sua profissão" />
+      </div>
       <button id="add-btn">Adicionar</button>
     </section>
 
-    <br /><br /><br />
-
+    <!-- Container da busca -->
     <div id="search-container">
       <input placeholder="Buscar por nome" id="search-input" />
       <button id="search-btn">Buscar</button>
     </div>
 
+    <!-- Tabela para exibir os dados -->
     <table id="table">
       <thead>
         <tr>
@@ -37,34 +47,59 @@
           <th>Nome</th>
           <th>Email</th>
           <th>Idade</th>
-          <th>Profissao</th>
-          <th>Deletar</th>
-          <th>Editar</th>
+          <th>Profissão</th>
+          <th colspan="2">Ações</th>
         </tr>
       </thead>
       <tbody>
-      
+        <!-- Exemplo de linha, que será gerenciada pelo JavaScript -->
+        <tr>
+            <td>123.456.789-00</td>
+            <td>Exemplo da Silva</td>
+            <td>exemplo@email.com</td>
+            <td>30</td>
+            <td>Desenvolvedor</td>
+            <td colspan="2">
+                <div>
+                  <button class="edit-button">Edit</button>
+                  <button class="delete-button">Delete</button>                 
+                </div>
+            </td>
+        </tr>
       </tbody>
     </table>
   </main>
 
-
+  <!-- Modal para edição -->
   <div id="modal" class="modal">
     <div class="modal-content">
+      <h2>Editar Informações</h2>
       <form id="update-form">
-        <label>CPF:</label>
-        <input type="text" id="update-cpf-input" /><br />
-        <label>Nome:</label>
-        <input type="text" id="update-name-input" /><br />
-        <label>Email:</label>
-        <input type="email" id="update-email-input" /><br />
-        <label>Idade:</label>
-        <input type="number" id="update-age-input" /><br />
-        <label>Profissao:</label>
-        <input type="text" id="update-profession-input" /><br />
-        <button type="button" id="update-btn">Atualizar</button>
+        <div>
+            <label for="update-cpf-input">CPF:</label>
+            <input type="text" id="update-cpf-input" />
+        </div>
+        <div>
+            <label for="update-name-input">Nome:</label>
+            <input type="text" id="update-name-input" />
+        </div>
+        <div>
+            <label for="update-email-input">Email:</label>
+            <input type="email" id="update-email-input" />
+        </div>
+        <div>
+            <label for="update-age-input">Idade:</label>
+            <input type="number" id="update-age-input" />
+        </div>
+        <div>
+            <label for="update-profession-input">Profissão:</label>
+            <input type="text" id="update-profession-input" />
+        </div>
       </form>
-      <button type="button" id="close-modal-btn">Fechar</button>
+      <div class="modal-actions">
+        <button type="button" id="close-modal-btn">Fechar</button>
+        <button type="button" id="update-btn">Atualizar</button>
+      </div>
     </div>
   </div>
 

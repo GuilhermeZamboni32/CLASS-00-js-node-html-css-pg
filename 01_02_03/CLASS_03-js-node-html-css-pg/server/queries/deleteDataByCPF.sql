@@ -1,0 +1,3 @@
+DELETE FROM client
+WHERE cpf = $1
+RETURNING *;

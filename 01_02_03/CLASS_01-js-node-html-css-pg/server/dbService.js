@@ -23,6 +23,7 @@ class DbService {
     return serviceInstance;
   }
 
+  // fechando pool
   async closeConnection() {
     await this.pool.end();
     console.log('PostgreSQL pool has been closed');

@@ -1,79 +1,109 @@
-require('dotenv').config();
 const { Pool } = require('pg');
-const clientQueries = require('./queries/clientQueries');
+const dotenv = require('dotenv');
+let instance = null;
+dotenv.config();
 
-let serviceInstance = null;
+const pool = new Pool({
+  host: process.env.HOST,
+  user: process.env.USER,
+  password: process.env.PASSWORD,
+  database: process.env.DATABASE,
+  port: process.env.DB_PORT,
+});
+
+pool.connect(err => {
+  if (err) {
+    console.log("CONNECTION ERROR. ERROR MESSAGE: ", err.message);
+  } else {
+    console.log("Conectado na Database Do PostgreSQL");
+  }
+});
 
 class DbService {
-  constructor() {
-    this.pool = new Pool({
-      host: process.env.HOST,
-      user: process.env.USER,
-      password: process.env.PASSWORD,
-      database: process.env.DATABASE,
-      port: process.env.DB_PORT,
-    });
-  }
-
-  // singleton
   static getDbServiceInstance() {
-    if (!serviceInstance) {
-      serviceInstance = new DbService();
-    }
-    return serviceInstance;
-  }
-
-  async closeConnection() {
-    await this.pool.end();
-    console.log('PostgreSQL pool has been closed');
+    return instance ? instance : new DbService();
   }
 
   async getAllData() {
-    const result = await this.pool.query(clientQueries.getAllData);
-    return result.rows;
+    try {
+      const sql = "SELECT * FROM client;";
+      const result = await pool.query(sql);
+      
+      return result.rows;
+    } catch (error) {
+      console.log(error);
+    }
   }
 
-  async getDataByCPF(cpf) {
-    const result = await this.pool.query(
-      clientQueries.getDataByCPF,
-      [cpf]
-    );
-    return result.rows[0];
+  // MÉTODO PARA INSERIR
+  async insertNewName(dados) {
+    try {
+      const dateAdded = new Date();
+
+      const sql = "INSERT INTO client (cpf, nome, email, idade, profissao) VALUES ($1, $2, $3, $4, $5) RETURNING cpf;";
+      const values = [dados.cpf, dados.nome, dados.email, dados.idade, dados.profissao]
+      
+      const result = await pool.query(sql, values);
+      console.log("result of insertNewName ====>>>>> ", result);
+      
+      const cpf = result.rows[0].cpf;
+      const nome = result.rows[0].nome;
+      const  email = result.rows[0].email;
+      
+      const idade = result.rows[0].idade;
+      const profissao = result.rows[0].profissao;
+      
+      return {
+        cpf: cpf,
+        name: nome,
+        email: email,
+        idade: idade,
+        profissao: profissao
+      };
+    } catch (error) {
+      console.log(error);
+    }
   }
 
-  async insertData({ cpf, nome, email, idade, profissao }) {
-    const values = [cpf, nome, email, idade, profissao];
-    const result = await this.pool.query(
-      clientQueries.insertData,
-      values
-    );
-    return result.rows[0];
+  // MÉTODO PARA DELETAR
+  async deleteRowById(id) {
+    try {
+      id = parseInt(id, 10);
+      const sql = "DELETE FROM client WHERE cpf = $1;";
+      const result = await pool.query(sql, [id]);
+      return result.rowCount === 1;
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
   }
 
-  async updateData({ cpf, nome, email, idade, profissao }) {
-    const values = [cpf, nome, email, idade, profissao];
-    const result = await this.pool.query(
-      clientQueries.updateData,
-      values
-    );
-    return result.rowCount === 1;
+  // MÉTODO PARA ATUALIZAR
+  async updateNameById(dados) {
+    console.log("dados dados dados dados ===>>>>>> ", dados);
+    
+    try {
+      const sql = "UPDATE client SET  nome=$2, email=$3, idade=$4, profissao=$5 WHERE cpf = $1;";
+      const values = [dados.cpf, dados.nome, dados.email, dados.idade, dados.profissao]
+
+      const result = await pool.query(sql, values);
+
+      return result.rowCount === 1;
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
   }
 
-  async deleteDataByCPF(cpf) {
-    const result = await this.pool.query(
-      clientQueries.deleteDataByCPF,
-      [cpf]
-    );
-    return result.rows[0];
-  }
-
-  async searchByName(nome) {
-    const pattern = `%${nome}%`;
-    const result = await this.pool.query(
-      clientQueries.searchByName,
-      [pattern]
-    );
-    return result.rows;
+  // MÉTODO PARA BUSCAR
+  async searchByName(name) {
+    try {
+      const sql = "SELECT * FROM client WHERE nome = $1;";
+      const result = await pool.query(sql, [name]);
+      return result.rows;
+    } catch (error) {
+      console.log(error);
+    }
   }
 }
 

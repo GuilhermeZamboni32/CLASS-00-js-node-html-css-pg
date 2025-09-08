@@ -137,7 +137,6 @@ function insertRowIntoTable(data) {
   }
 }
 
-
 function loadHTMLTable(data) {
   const table = document.querySelector('table tbody');
 
@@ -162,10 +161,3 @@ function loadHTMLTable(data) {
 
   table.innerHTML = tableHtml;
 }
-
-
-
-
-
-//{<th id="delet-btn">Deletar</th>
-  //<th id="edit-btn">Editar</th>}

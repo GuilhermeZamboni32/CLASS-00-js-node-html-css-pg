@@ -1,0 +1,12 @@
+Vá a pasta server:
+    npm init -y
+    npm install express
+    npm install pg
+    npm install nodemon OU npm install -g --force nodemon
+    npm install cors
+
+
+Como rodar o código:
+    nodemon app.js
+    or
+    node app.js

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="stylesheet.css" />
+  <title>FullStact web app</title>
+</head>
+<body>
+  <main>
+
+    <section id="insert-section">
+      <label>CPF: </label>
+      <input type="text" id="cpf-input" />
+      <label>Nome: </label>
+      <input type="text" id="name-input" />
+      <label>Email: </label>
+      <input type="email" id="email-input" />
+      <label>Idade: </label>
+      <input type="number" id="age-input" />
+      <label>Profissao: </label>
+      <input type="text" id="profession-input" />
+      <button id="add-btn">Adicionar</button>
+    </section>
+
+    <br /><br /><br />
+
+    <div>
+      <input placeholder="search by name" id="search-input" />
+      <button id="search-btn">Search</button>
+    </div>
+
+    <table id="table">
+      <thead>
+        <tr>
+          <th>CPF</th>
+          <th>Nome</th>
+          <th>Email</th>
+          <th>Idade</th>
+          <th>Profissao</th>
+          <th>Deletar</th>
+          <th>Editar</th>
+        </tr>
+      </thead>
+      <tbody>
+        
+      </tbody>
+    </table>
+  </main>
+
+
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <h2>Editar</h2>
+      <form id="update-form">
+        <label>CPF:</label>
+        <input type="text" id="update-cpf-input" /><br />
+        <label>Nome:</label>
+        <input type="text" id="update-name-input" /><br />
+        <label>Email:</label>
+        <input type="email" id="update-email-input" /><br />
+        <label>Idade:</label>
+        <input type="number" id="update-age-input" /><br />
+        <label>Profissao:</label>
+        <input type="text" id="update-profession-input" /><br />
+
+        <button type="button" id="update-btn">Atualizar</button>
+      </form>
+      <button type="button" id="close-modal-btn">Fechar</button>
+    </div>
+  </div>
+
+  <script src="index.js"></script>
+</body>
+</html>

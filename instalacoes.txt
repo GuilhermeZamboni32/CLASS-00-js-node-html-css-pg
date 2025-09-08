@@ -1,9 +1,22 @@
-Go to server folder and install the packages bellow:
-    npm init -y
+Vá para a pasta do backend e instale os pacote abaixo:
     npm install express
     npm install pg
-    npm install -g --force nodemon
+    npm install nodemon OU npm install -g --force nodemon
     npm install cors
+    npm install dotenv
+
+    OU
+    npm install express pg nodemon cors dotenv
 
 
-How to run the code: npm start
+Como rodar o código?
+    npm start
+
+No seu banco de dados:
+CREATE TABLE client (
+    cpf VARCHAR(11) PRIMARY KEY NOT NULL,
+    nome VARCHAR(55) NOT NULL,
+    email VARCHAR(100) NOT NULL ,
+    idade INTEGER,
+    profissao VARCHAR(100)
+);
